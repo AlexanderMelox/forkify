@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/AlexanderMelox/forkify/issues"
   },
-  "homepage": "https://github.com/AlexanderMelox/forkify#readme"
+  "homepage": "https://github.com/AlexanderMelox/forkify#readme",
+  "devDependencies": {
+    "webpack": "^4.25.1"
+  },
+  "dependencies": {}
 }
