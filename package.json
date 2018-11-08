@@ -1,0 +1,19 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "Recipe app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexanderMelox/forkify.git"
+  },
+  "author": "Alexander Melo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexanderMelox/forkify/issues"
+  },
+  "homepage": "https://github.com/AlexanderMelox/forkify#readme"
+}
