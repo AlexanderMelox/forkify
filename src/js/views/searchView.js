@@ -8,6 +8,7 @@ export const clearInput = () => {
 
 export const clearResults = () => {
   elements.searchResultList.innerHTML = '';
+  elements.searchResultPages.innerHTML = '';
 };  
 
 // Function to truncate the recipe title so that it is less than 17 characters
@@ -44,7 +45,41 @@ const renderRecipe = recipe => {
   elements.searchResultList.insertAdjacentHTML('beforeend', markup);
 };
 
-export const renderResults = recipes => {
-  console.log('recipes:', recipes);
-  recipes.forEach(recipe => renderRecipe(recipe));
+// type: 'prev' or 'next'
+const createButton = (page, type) => `
+  <button class="btn-inline results__btn--${type}" data-goto=${type === 'prev' ? page - 1 : page + 1}>
+    <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
+    <svg class="search__icon">
+        <use href="img/icons.svg#icon-triangle-${type === 'prev' ? 'left' : 'right'}"></use>
+    </svg>
+  </button>
+`;
+
+const renderButtons = (page, numberResults, resultsPerPage) => {
+  const pages = Math.ceil(numberResults / resultsPerPage);
+
+  let button;
+  if (page === 1 && pages > 1) {
+    // Only button to go to next page
+    button = createButton(page, 'next');
+  } else if (page < pages) {
+    // Both buttons
+    button = `
+      ${createButton(page, 'prev')}
+      ${createButton(page, 'next')}
+    `;
+  } else if (page === pages && pages > 1) {
+    // Only button to go to the previous page
+    button = createButton(page, 'prev');
+  }
+
+  elements.searchResultPages.insertAdjacentHTML('afterbegin', button);
+};
+
+export const renderResults = (recipes, page = 1, resultsPerPage = 10) => {
+  const start = (page - 1) * resultsPerPage;
+  const end = page * resultsPerPage;
+
+  recipes.slice(start, end).forEach(recipe => renderRecipe(recipe));
+  renderButtons(page, recipes.length, resultsPerPage);
 };
