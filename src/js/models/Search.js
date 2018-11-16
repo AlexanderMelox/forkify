@@ -11,7 +11,12 @@ class Search {
     const apiURL = 'https://www.food2fork.com/api/search';
     try {
       const results = await axios(`${apiURL}?key=${key}&q=${this.query}`);
-      this.results = results.data.recipes;
+      if (results.data.error) {
+        alert(results.data.error);
+        this.results = null;
+      } else {
+        this.results = results.data.recipes;
+      }
     } catch(error) {
       alert(error);
     }
