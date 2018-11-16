@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { key } from '../config';
 
 class Search {
   constructor(query) {
@@ -6,11 +7,8 @@ class Search {
   }
 
   async getResults() {
-    const key = '3b9d3ef77f2b494ff44def3702431b75';
-    const proxy = 'https://api.codetabs.com/v1/proxy?quest=';
-    const apiURL = 'https://www.food2fork.com/api/search';
     try {
-      const results = await axios(`${apiURL}?key=${key}&q=${this.query}`);
+      const results = await axios(`https://www.food2fork.com/api/search?key=${key}&q=${this.query}`);
       if (results.data.error) {
         alert(results.data.error);
         this.results = null;
