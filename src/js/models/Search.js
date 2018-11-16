@@ -10,7 +10,7 @@ class Search {
     const proxy = 'https://api.codetabs.com/v1/proxy?quest=';
     const apiURL = 'https://www.food2fork.com/api/search';
     try {
-      const results = await axios(`${proxy}${apiURL}?key=${key}&q=${this.query}`);
+      const results = await axios(`${apiURL}?key=${key}&q=${this.query}`);
       this.results = results.data.recipes;
     } catch(error) {
       alert(error);
