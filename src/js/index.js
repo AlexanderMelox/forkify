@@ -77,8 +77,9 @@ const controlRecipe = async () => {
     state.recipe = new Recipe(id);
 
     try {
-      // Get recipe data
+      // Get recipe data and parse ingredients
       await state.recipe.getRecipe();
+      state.recipe.parseIngredients();
 
       // Calculate servings and time
       state.recipe.calcServings();
@@ -93,4 +94,4 @@ const controlRecipe = async () => {
   }
 };
 
-['haschange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
+['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipe));
